@@ -7,6 +7,7 @@ import { NextUIProvider } from "@nextui-org/system";
 import { useRouter } from "next/navigation";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { SessionProvider } from "next-auth/react";
+import { Toaster } from "react-hot-toast";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -27,6 +28,7 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   return (
     <SessionProvider>
       <NextUIProvider navigate={router.push}>
+        <Toaster position="bottom-center"/>
         <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
       </NextUIProvider>
     </SessionProvider>

@@ -7,7 +7,7 @@ export default function HomePage() {
       <div className="w-[600px] flex bg-white/5 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden">
         <div className="p-8 sm:p-12 w-full">
           <h1 className="text-xl font-bold text-center mb-8">
-            Welcome to Our App
+            Hello world!
           </h1>
           <SessionInfo />
           <Actions />

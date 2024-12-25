@@ -6,8 +6,7 @@ import { Input } from "@nextui-org/input";
 import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 
-
-export default function LoginPage() {
+export default function RegisterPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const searchUrl = useSearchParams();
@@ -25,13 +24,12 @@ export default function LoginPage() {
     });
   };
 
-
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="w-full max-w-md p-5 bg-white/5 rounded-xl shadow-2xl backdrop-blur-sm bg-opacity-80">
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Login
+            Register account
           </h2>
         </div>
         <form className="mt-5 flex flex-col gap-5" onSubmit={handleSubmit}>
@@ -62,18 +60,17 @@ export default function LoginPage() {
               variant="shadow"
               className="w-full"
             >
-              Sign In
+              Sign Up
             </Button>
           </div>
         </form>
         <div className="text-center mt-5">
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            Dont have an account?{" "}
             <a
-              href="/auth/register"
-              className="text-blue-600 hover:underline dark:text-blue-400"
+              href="/auth/login/"
+              className="hover:underline"
             >
-              Sign up
+              Back
             </a>
           </p>
         </div>

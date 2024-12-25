@@ -16,11 +16,13 @@ export function Actions() {
         Log In
       </Button>
       <Button
-        color="secondary"
+        color="default"
         variant="shadow"
         size="md"
         className="w-full sm:w-auto"
-        onClick={() => signOut()}
+        onClick={() => signOut({
+          callbackUrl: "/auth/login/"
+        })}
       >
         Sign Out
       </Button>
