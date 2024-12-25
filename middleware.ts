@@ -1,11 +1,22 @@
-import { type NextRequestWithAuth, withAuth } from 'next-auth/middleware';
+import { withAuth } from 'next-auth/middleware';
+import { NextResponse } from 'next/server';
 
-const middleware = async (request: NextRequestWithAuth) => {
-  console.log('Middleware request:', request);
-};
+export default withAuth(
+  function middleware(req) {
+    const token = req.nextauth.token;
+    console.log('Middleware request:', req);
+    if (!token) {
+      return NextResponse.redirect(new URL('/auth/login', req.url));
+    }
+    return NextResponse.next();
+  },
+  {
+    callbacks: {
+      authorized: ({ token }) => !!token
+    }
+  }
+);
 
 export const config = {
   matcher: ['/'],
 };
-
-export default withAuth(middleware);

@@ -13,12 +13,15 @@ export const authOptions: AuthOptions = {
       },
       authorize: async (credentials) => {
         if (!credentials?.username || !credentials?.password) return null;
-        const user: User = { id: randomUUID(), name: credentials?.username};
-        if (user) {
-          return user;
-        } else {
-          return null;
-        }
+        
+        const user: User = { 
+          token: randomUUID(),
+          id: randomUUID(), 
+          name: credentials.username,
+          group: "",
+        };
+        
+        return user;
       },
     }),
   ],
@@ -29,6 +32,20 @@ export const authOptions: AuthOptions = {
     maxAge: 30 * 24 * 60 * 60, //30 days
     updateAge: 24 * 60 * 60, //24 h
     strategy: "jwt",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.user = user;
+        token.accessToken = user.token;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.user = token.user as User;
+      session.accessToken = token.accessToken as string;
+      return session;
+    }
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
